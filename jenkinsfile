@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Docker 이미지 빌드
+                    sh 'docker build -t httpd .'
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Docker 컨테이너 실행
+                    sh 'docker run --name my-container -d httpd'
+                }
+            }
+        }
+        stage('Clean Up') {
+            steps {
+                script {
+                    // Docker 컨테이너 종료 및 삭제
+                    sh 'docker stop my-container'
+                    sh 'docker rm my-container'
+                }
+            }
+        }
+    }
+}
