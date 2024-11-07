@@ -1,17 +1,18 @@
-# 1. 기본 이미지 선택
-FROM httpd:2.4
+# 1. 기본 이미지 선택 (Node.js)
+FROM node:16
 
-# 2. 필수 패키지 설치
-RUN apt-get update && apt-get install -y python3 python3-pip
+# 2. 앱 디렉토리 만들기
+WORKDIR /usr/src/app
 
-# 3. 애플리케이션 코드 복사
-COPY ./html/ /usr/local/apache2/htdocs/
+# 3. 의존성 파일을 복사하여 설치
+COPY package*.json ./
+RUN npm install
 
-# 4. 작업 디렉토리 설정
-WORKDIR /app
+# 4. 애플리케이션 소스 코드를 복사
+COPY . .
 
-# 5. 필요한 Python 패키지 설치
-RUN pip3 install -r requirements.txt
-
-# 6. 포트 노출
+# 5. 포트 80을 개방
 EXPOSE 80
+
+# 6. 애플리케이션 실행
+CMD [ "npm", "start" ]
