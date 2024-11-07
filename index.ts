@@ -13,6 +13,6 @@ app.use((req: Request, res: Response) => {
 });
 
 // 서버 실행
-app.listen(80, () => {
+app.listen(3000, () => {
     console.log('Server is listening on port 80...');
 });

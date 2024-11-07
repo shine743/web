@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # 5. 포트 80을 개방
-EXPOSE 80
+EXPOSE 3000
 
 # 6. 애플리케이션 실행
 CMD [ "npm", "start" ]
