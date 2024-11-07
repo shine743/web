@@ -1,11 +1,18 @@
-/*80번 포트 열어서 웹서버 띄우는 서버*/
-import express from 'express'
+import express from 'express';
 
-const app = express()
+const app = express();
 
-app.get('', (req, res, next) => {
-    res.send(200)
-})
+// 기본 라우터 (정상 응답)
+app.get('/', (req, res) => {
+    res.status(200).send('Hello, world!');
+});
+
+// 404 에러 처리 라우터
+app.use((req, res) => {
+    res.status(404).send('Not Found');
+});
+
+// 서버 실행
 app.listen(80, () => {
-    console.log('listening...')
-})
+    console.log('Server is listening on port 80...');
+});
