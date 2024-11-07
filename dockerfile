@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 # 3. 의존성 파일을 복사하여 설치
 COPY package*.json ./
 RUN npm install
+RUN apt-get update && apt-get install -y sudo
 
 # 4. 애플리케이션 소스 코드를 복사
 COPY . .
