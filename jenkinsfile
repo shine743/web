@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Git repository에서 소스 코드 체크아웃
                 git 'https://github.com/shine743/web.git'
             }
         }
@@ -13,9 +14,18 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-                    sh 'sudo apt update && sudo apt install docker sudo'
-                    sh 'sudo apt-get update && sudo apt-get install -y docker.io'
-                    sh 'docker build -t httpd .'
+                    sh '''
+                        # Docker가 설치되어 있는지 확인하고 설치
+                        if ! command -v docker &> /dev/null; then
+                            echo "Docker is not installed. Installing..."
+                            sudo apt update && sudo apt install -y docker.io
+                        else
+                            echo "Docker is already installed"
+                        fi
+                        
+                        # Docker 이미지 빌드
+                        docker build -t myapp:latest .
+                    '''
                 }
             }
         }
@@ -23,7 +33,10 @@ pipeline {
             steps {
                 script {
                     // Docker 컨테이너 실행
-                    sh 'docker run --name my-container -d httpd'
+                    sh '''
+                        # Docker 컨테이너 실행
+                        docker run --name my-container -d myapp:latest
+                    '''
                 }
             }
         }
@@ -31,8 +44,10 @@ pipeline {
             steps {
                 script {
                     // Docker 컨테이너 종료 및 삭제
-                    sh 'docker stop my-container || true'
-                    sh 'docker rm my-container || true'
+                    sh '''
+                        docker stop my-container || true
+                        docker rm my-container || true
+                    '''
                 }
             }
         }
