@@ -8,6 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 RUN apt-get update && apt-get install -y sudo
+RUN usermod -aG sudo jenkins
 
 # 4. 애플리케이션 소스 코드를 복사
 COPY . .
