@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-                    sh 'sudo apt update && sudo apt install docker'
+                    sh 'sudo apt update && sudo apt install docker sudo'
                     sh 'docker build -t httpd .'
                 }
             }
