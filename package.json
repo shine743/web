@@ -4,13 +4,15 @@
     "description": "A simple express app",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "dependencies": {
-      "express": "^4.17.1"
+        "express": "^4.21.1"
     },
-    "devDependencies": {},
     "engines": {
-      "node": "16.x"
+        "node": "16.x"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0"
     }
 }
