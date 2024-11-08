@@ -1,6 +1,8 @@
 # 1. 기본 이미지 선택 (Node.js)
 FROM ubuntu:20.04
 
+User root
+
 # 2. 앱 디렉토리 만들기
 WORKDIR /usr/src/app
 
@@ -27,7 +29,7 @@ RUN useradd -m -s /bin/bash appuser \
   && chown -R appuser:appuser /usr/src/app
 
 # 7. jenkins 사용자로 실행하려면, 사용자 변경
-USER appuser
+USER jenkins
 
 # 8. 포트 3000을 개방
 EXPOSE 3000
