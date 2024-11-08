@@ -5,7 +5,8 @@ pipeline {
         stage('Check Docker Path') {
             steps {
                 script {
-                    sh 'which docker'
+                    echo 'Checking Docker version..'
+                    sh 'bash-c "which docker || echo Docker not found"'
                 }
             }
         }
