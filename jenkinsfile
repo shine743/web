@@ -1,14 +1,9 @@
 pipeline {
     agent any
-
-    environment {
-        PATH = '/usr/local/bin:${env.PATH}'
-    }
     stages {
         stage('Check Environment') {
             steps {
                 script {
-                echo 'Checking system environment variables...'
                 sh "git --version" // git 명령어 확인
                 sh "which docker"  // docker 명령어 확인
                 }
