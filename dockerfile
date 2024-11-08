@@ -1,8 +1,6 @@
 # 1. 기본 이미지 선택 (Node.js)
 FROM ubuntu:20.04
 
-User root
-
 # 2. 앱 디렉토리 만들기
 WORKDIR /usr/src/app
 
