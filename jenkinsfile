@@ -1,13 +1,22 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = '/usr/local/bin:$PATH'
+    }
     stages {
         stage('Check Docker Path') {
             steps {
                 script {
+                    echo 'Checking system environment variables...'
+                    sh 'printenv'
+                    echo "Current PATH: ${env.PATH}"
                     echo 'Checking Docker version..'
-                    echo $PATH
-                    sh 'bash-c "which docker || echo Docker not found"'
+                    sh ''' 
+                        export PATH="/usr/local/bin:$PATH"
+                        which docker || echo Docker not found
+                        docker --version || echo Docker not installed
+                    '''
                 }
             }
         }
