@@ -10,18 +10,13 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Check Docker Path') {
+        stage('Check Environment') {
             steps {
                 script {
-                    echo 'Checking system environment variables...'
-                    sh 'printenv'
-                    sh 'echo $PATH'
-                    echo "Current PATH: ${env.PATH}"
-                    echo 'Checking Docker version..'
-                    sh ''' 
-                        which docker || echo Docker not found
-                        docker --version || echo Docker not installed
-                    '''
+                echo 'Checking system environment variables...'
+                sh 'echo $PATH'  // $PATH 환경 변수 확인
+                sh 'which git'  // git 명령어 확인
+                sh 'which docker'  // docker 명령어 확인
                 }
             }
         }
