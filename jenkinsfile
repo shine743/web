@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Checking Docker version..'
+                    echo $PATH
                     sh 'bash-c "which docker || echo Docker not found"'
                 }
             }
